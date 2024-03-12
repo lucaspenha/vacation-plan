@@ -16,16 +16,17 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('auth/logout',[ AuthController::class , 'logout']);
-
-    Route::apiResource('holiday-plans', HolidayPlanController::class);
-    Route::get('holiday-plans/pdf/{holiday_plan}', [ HolidayPlanController::class , 'pdf' ]);
-
-});
-
-Route::prefix('auth')->group(function(){
-    Route::post('login',[ AuthController::class , 'login']);
-    Route::post('register',[ RegisterController::class , 'register']);
+Route::as('api.')->group(function(){
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('auth/logout',[ AuthController::class , 'logout'])->name('auth.logout');
+    
+        Route::apiResource('holiday-plans', HolidayPlanController::class);
+        Route::get('holiday-plans/pdf/{holiday_plan}', [ HolidayPlanController::class , 'pdf' ])->name('holiday-plans.pdf');
+    
+    });
+    
+    Route::prefix('auth')->as('auth.')->group(function(){
+        Route::post('login',[ AuthController::class , 'login'])->name('login');
+        Route::post('register',[ RegisterController::class , 'register'])->name('register');
+    });
 });
