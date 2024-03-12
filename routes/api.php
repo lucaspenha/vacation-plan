@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\HolidayPlanController;
 use App\Http\Controllers\Auth\Api\AuthController;
 use App\Http\Controllers\Auth\Api\RegisterController;
 use Illuminate\Http\Request;
@@ -19,12 +20,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('auth/logout',[ AuthController::class , 'logout']);
 
-    Route::get('/user', function (Request $request) {
-        return $request->user();
-    });
+    Route::apiResource('holiday-plans', HolidayPlanController::class);
+    Route::get('holiday-plans/pdf/{holiday_plan}', [ HolidayPlanController::class , 'pdf' ]);
 
 });
-
 
 Route::prefix('auth')->group(function(){
     Route::post('login',[ AuthController::class , 'login']);

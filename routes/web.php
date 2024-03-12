@@ -1,5 +1,7 @@
 <?php
 
+use App\Facades\HolidayPlanGeneratePdfFacade;
+use App\Models\HolidayPlan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +15,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test-pdf', function () {
+    return view('pdf.holiday-plan',[ 'data' => HolidayPlan::first() ]);
 });
