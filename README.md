@@ -1,7 +1,7 @@
 # Buzzvel 2024 Dev Team Test
 2024 - Vacation Plan
 
-[📼 Video Demo](https://youtube/code)
+[📼 Video Demo](https://youtu.be/28U6Es_Z96c)
 
 [🧾 Documentation](https://documenter.getpostman.com/view/10594710/2sA2xk1roM)
 
