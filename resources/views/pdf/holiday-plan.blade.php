@@ -11,7 +11,7 @@
     </p>
     <br>
     <h4 class="text-gray-500">description</h4>
-    <p class="text-gray-900">{{$data->description}}</p>
+    <p class="text-gray-900">{!! nl2br($data->description) !!}</p>
 
     <p></p>
     @if($data->participants)
