@@ -23,7 +23,7 @@ class RegisterController extends Controller
             return $this->responseWithError('Sorry, could not user registered');
 
         return $this->responseWithSuccess('User register successful',[
-            'user' => $user
+            'user' => $user->makeHidden(['id','updated_at'])
         ]);
 
     }

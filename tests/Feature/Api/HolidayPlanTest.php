@@ -100,7 +100,7 @@ it('should be able to return one holiday plan in the get route', function () {
     $this->actingAs($user)
         ->getJson(
             route('api.holiday-plans.show',
-            ['holiday_plan' => $data->id ]
+            ['holiday_plan' => $data->uuid ]
         ))
         ->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([
@@ -121,7 +121,7 @@ it('should be able to validate body request in the update route', function () {
     $user = User::factory()->create();
     $this->actingAs($user)
         ->putJson(
-            route('api.holiday-plans.update',['holiday_plan' => $data->id ])
+            route('api.holiday-plans.update',['holiday_plan' => $data->uuid ])
         )
         ->assertStatus(Response::HTTP_BAD_REQUEST);
 });
@@ -140,7 +140,7 @@ test('test if holiday plan not found in the update route', function () {
 it('should be able to validate a required date format Y-m-d and participants in the update route', function () {
     
     $user = User::factory()->create();
-    $id = HolidayPlan::factory()->createOne()->id;
+    $id = HolidayPlan::factory()->createOne()->uuid;
     $data = [
         'date' => now()->format('d/m/Y'),
         'participants' => 'participant 1,participant 3,participant 3',
@@ -160,7 +160,7 @@ it('should be able to validate a required date format Y-m-d and participants in 
 
 it('should be able to update a holiday plan in the update route', function () {
     
-    $id = HolidayPlan::factory()->createOne()->id;
+    $id = HolidayPlan::factory()->createOne()->uuid;
     $user = User::factory()->create();
     $data = HolidayPlan::factory()->createOne()->toArray();
     
@@ -185,7 +185,7 @@ test('test if holiday plan not found in the delete route', function () {
 
 it('should be able to desttoy a holiday plan in the delete route', function () {
     
-    $id = HolidayPlan::factory()->createOne()->id;
+    $id = HolidayPlan::factory()->createOne()->uuid;
     $user = User::factory()->create();
     
     $this->actingAs($user)
@@ -211,7 +211,7 @@ it('should be able to holiday plan link file in the pdf generate route', functio
 
     $this->actingAs($user)
         ->getJson(
-            route('api.holiday-plans.pdf',['holiday_plan' => $data->id ]
+            route('api.holiday-plans.pdf',['holiday_plan' => $data->uuid ]
         ))
         ->assertStatus(Response::HTTP_OK)
         ->assertJsonStructure([

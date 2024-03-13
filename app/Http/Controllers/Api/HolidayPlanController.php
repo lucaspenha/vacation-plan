@@ -36,7 +36,7 @@ class HolidayPlanController extends Controller
 
     public function show($holidayPlan)
     {
-        if(!$holidayPlan = HolidayPlan::find($holidayPlan))
+        if(!$holidayPlan = HolidayPlan::whereUuid($holidayPlan)->first())
             return $this->responseWithError('Holiday plan not found',[],Response::HTTP_NOT_FOUND);
 
         return $this->responseWithSuccess('Ok', 
@@ -46,7 +46,7 @@ class HolidayPlanController extends Controller
 
     public function update(HolidayPlanUpdateRequest $request, $id)
     {
-        if(!$holidayPlan = HolidayPlan::find($id))
+        if(!$holidayPlan = HolidayPlan::whereUuid($id)->first())
             return $this->responseWithError('Holiday plan not found',[],Response::HTTP_NOT_FOUND);
 
         if(!$request->all()) 
@@ -61,7 +61,7 @@ class HolidayPlanController extends Controller
 
     public function destroy($id)
     {
-        if(!$holidayPlan = HolidayPlan::find($id))
+        if(!$holidayPlan = HolidayPlan::whereUuid($id)->first())
             return $this->responseWithError('Holiday plan not found',[], Response::HTTP_NOT_FOUND);
 
         $holidayPlan->delete();
@@ -71,7 +71,7 @@ class HolidayPlanController extends Controller
 
     public function pdf($id){
 
-        if(!$holidayPlan = HolidayPlan::find($id))
+        if(!$holidayPlan = HolidayPlan::whereUuid($id)->first())
             return $this->responseWithError('Holiday plan not found',[], Response::HTTP_NOT_FOUND);
 
             try {
