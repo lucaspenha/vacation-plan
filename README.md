@@ -3,7 +3,7 @@
 
 [📼 Video Demo](https://youtube/code)
 
-[🔗 Live Demo](http://lucaspenha.com.br/buzzvel)
+[🔗 Live Demo](http://lucaspenha.com.br/buzzvel/)
 
 [🧾 Documentation](https://documenter.getpostman.com/view/10594710/2sA2xk1roM)
 

@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return redirect()->to('https://documenter.getpostman.com/view/10594710/2sA2xk1roM');
+});
 Route::get('/test-pdf', function () {
     return view('pdf.holiday-plan',[ 'data' => HolidayPlan::first() ]);
 });
