@@ -31,8 +31,8 @@ class HolidayPlan extends Model
     protected function participants(): Attribute
     {
         return Attribute::make(
-            get: fn (string $value) => explode(";",$value),
-            set: fn (array $value) => implode(";",$value),
+            get: fn ($value) => (is_string($value) ? explode(";",$value) : ""),
+            set: fn ($value) => (is_array($value) ? implode(";",$value) : ""),
         );
     }
 }
