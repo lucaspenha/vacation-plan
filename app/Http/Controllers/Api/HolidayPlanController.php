@@ -39,9 +39,9 @@ class HolidayPlanController extends Controller
         if(!$holidayPlan = HolidayPlan::find($holidayPlan))
             return $this->responseWithError('Holiday plan not found',[],Response::HTTP_NOT_FOUND);
 
-        return $this->responseWithSuccess('Ok', [
+        return $this->responseWithSuccess('Ok', 
             HolidayPlanResource::make($holidayPlan)
-        ], Response::HTTP_OK);
+        , Response::HTTP_OK);
     }
 
     public function update(HolidayPlanUpdateRequest $request, $id)
@@ -49,11 +49,14 @@ class HolidayPlanController extends Controller
         if(!$holidayPlan = HolidayPlan::find($id))
             return $this->responseWithError('Holiday plan not found',[],Response::HTTP_NOT_FOUND);
 
+        if(!$request->all()) 
+            return $this->responseWithError('the request body is empty',[],Response::HTTP_BAD_REQUEST);
+
         $holidayPlan->fill($request->all())->save();
 
-        return $this->responseWithSuccess('Holiday Plan updated successfully', [
+        return $this->responseWithSuccess('Holiday Plan updated successfully',
             HolidayPlanResource::make($holidayPlan)
-        ], Response::HTTP_CREATED);
+        , Response::HTTP_OK);
     }
 
     public function destroy($id)
@@ -71,7 +74,11 @@ class HolidayPlanController extends Controller
         if(!$holidayPlan = HolidayPlan::find($id))
             return $this->responseWithError('Holiday plan not found',[], Response::HTTP_NOT_FOUND);
 
-        $pdf = HolidayPlanGeneratePdfFacade::make($holidayPlan);
+            try {
+                $pdf = HolidayPlanGeneratePdfFacade::make($holidayPlan);
+            } catch (\Throwable $th) {
+                return $this->responseWithError('It was not possible to generate the pdf file, please contact us',[], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
 
         return $this->responseWithSuccess('Holiday Plan PDF create successfully',[
             'link_pdf' => $pdf->url,
