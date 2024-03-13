@@ -1,11 +1,11 @@
 # Buzzvel 2024 Dev Team Test
 2024 - Vacation Plan
 
-My test video: [https://youtube/code](https://youtube/code)
+[📼 Video Demo](https://youtube/code)
 
-My live project is hosted on:  [https://youtube/code](https://youtube/code)
+[🔗 Live Demo](http://lucaspenha.com.br/buzzvel)
 
-Documentation:  [https://postman](https://postman)
+[🧾 Documentation](https://documenter.getpostman.com/view/10594710/2sA2xk1roM)
 
 ## What is it?
 
@@ -46,7 +46,7 @@ The app was build using Laravel Sail (Docker).
     ```
 3. Start the containers with Sail
     ```
-    ./vendor/bin/sail up
+    ./vendor/bin/sail up -d
     ```
 5. Create App Key: 
     ```
